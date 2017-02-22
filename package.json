@@ -1,0 +1,20 @@
+{
+  "name": "vclabs-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mailgun-js": "^0.7.14",
+    "mongodb": "^2.2.11"
+  },
+  "engines": {
+    "node": "4.1.1"
+  }
+}
