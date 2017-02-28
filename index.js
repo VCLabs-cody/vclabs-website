@@ -1,6 +1,8 @@
 var express = require('express');
 var mongodb = require('mongodb');
 var app = express();
+var forceSSL = require('express-force-ssl');
+var helmet = require('helmet');
 var path = require('path');
 var bodyParser = require('body-parser');
 var api_key = 'key-ee95f4d7aef1d9c11d3a8ef94a9bd687';
@@ -9,12 +11,15 @@ var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(express.static('public'));
-
-// app.get('/', function (req, res) {
-//   res.sendFile(path.join(__dirname + '/index.html'));
-// });
+app.use(helmet());
+app.use(forceSSL);
+app.set('forceSSLOptions', {
+  enable301Redirects: true,
+  trustXFPHeader: true,
+  httpsPort: 443,
+  sslRequiredMessage: 'SSL Required.'
+});
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
@@ -27,9 +32,6 @@ app.get('/jobs', function (req, res) {
 app.get('/backstage', function (req, res) {
   res.sendFile(path.join(__dirname + '/demo.html'));
 });
-app.get('/cvi',function(req,res){
-   res.sendFile(path.join(__dirname + '/cvi.html'));
-})
 app.get('/success',function(req,res){
    res.sendFile(path.join(__dirname + '/success.html'));
 })
