@@ -5,8 +5,8 @@ var forceSSL = require('express-force-ssl');
 var helmet = require('helmet');
 var path = require('path');
 var bodyParser = require('body-parser');
-var api_key = 'key-ee95f4d7aef1d9c11d3a8ef94a9bd687';
-var domain = 'sandbox771cbaa483844883b70b3cf9f943c042.mailgun.org';
+var api_key = process.env.MAILGUN_API_KEY;
+var domain = process.env.MAILGUN_DOMAIN;
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 app.use(bodyParser.json());
